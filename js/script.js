@@ -24,3 +24,39 @@ Il recap dei dati e l'output del prezzo finale, andranno quindi stampati in pagi
 5- stampo il prezzo finale in pagina.
 
 */
+
+// 1- prendo gli elementi dal DOM.
+// prezzo biglietto
+const targetElement = document.getElementById("ticket-price");
+// nome biglietto
+const targetName = document.getElementById("ticket-name");
+
+// bottone
+const submitButton = document.getElementById("submit");
+
+//inputs
+const inputFsName = document.getElementById("firstname-secondname");
+const inputkms = document.getElementById("kilometres");
+const inputAge = document.getElementById("user-age");
+
+// 2- raccolgo i dati dell'utente immessi tramite gli input.
+
+submitButton.addEventListener("click", function () {
+  const fsName = inputFsName.value.trim();
+  console.log(fsName);
+  const kilometres = inputkms.value.trim();
+  console.log(kilometres);
+  const userAge = inputAge.value;
+  console.log(userAge);
+
+  let price = kilometres * 0.21;
+  if (userAge == "under18") {
+    price *= 0.8;
+  } else if (userAge == "over65") {
+    price *= 0.6;
+  }
+
+  targetName.innerText = `Complimenti ${fsName}, ecco il prezzo del tuo biglietto:`;
+
+  targetElement.innerText = `${price.toFixed(2)}€`;
+});
