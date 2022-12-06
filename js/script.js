@@ -43,20 +43,33 @@ const inputAge = document.getElementById("user-age");
 
 submitButton.addEventListener("click", function () {
   const fsName = inputFsName.value.trim();
-  console.log(fsName);
   const kilometres = inputkms.value.trim();
-  console.log(kilometres);
   const userAge = inputAge.value;
-  console.log(userAge);
 
-  let price = kilometres * 0.21;
-  if (userAge == "under18") {
-    price *= 0.8;
-  } else if (userAge == "over65") {
-    price *= 0.6;
+  // VALIDAZIONE
+  let isValid = true;
+
+  // mi assicuro che l'utente inserisca nome e cognome
+  if (!fsName) {
+    isValid = false;
+    alert("Devi inserire Nome e Cognome");
   }
 
-  targetName.innerText = `Complimenti ${fsName}, ecco il prezzo del tuo biglietto:`;
+  if (kilometres <= 0 || isNaN(kilometres)) {
+    isValid = false;
+    alert("Devi inserire i chilometri che vuoi percorrere");
+  }
 
-  targetElement.innerText = `${price.toFixed(2)}€`;
+  if (isValid) {
+    let price = kilometres * 0.21;
+    if (userAge == "under18") {
+      price *= 0.8;
+    } else if (userAge == "over65") {
+      price *= 0.6;
+    }
+
+    targetName.innerText = `Complimenti ${fsName}, ecco il prezzo del tuo biglietto:`;
+
+    targetElement.innerText = `${price.toFixed(2)}€`;
+  }
 });
